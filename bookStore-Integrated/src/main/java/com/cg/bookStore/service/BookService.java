@@ -10,20 +10,32 @@ import com.cg.bookStore.entities.CustomerReview;
 import com.cg.bookStore.exceptions.BookIdException;
 import com.cg.bookStore.exceptions.OrdersException;
 
+/************************************************************************************
+*          @author         Kiran Rajput
+*          Description      It is a service class that provides the services for 
+*                           Listing , cancel and update order Information
+*          Version          1.0
+*          Created Date     18-JUL-2020
+************************************************************************************/
+
 public interface BookService {
 	public OrderInformation viewOrderDetails(int orderId)throws OrdersException;
 	
 
 
 	public boolean removeBook(String bookId)throws BookIdException,BookIdNotFoundException;
-	
-	
 
-	//Cancel Order.
+	/************************************************************************************
+	 * Method:                        cancel Order
+     * Description:                   to cancel orders 
+	************************************************************************************/
 	public boolean findOrderById(int orderId);
 	public String cancleOrder(int orderId);
 	
-	//List order
+	/************************************************************************************
+	 * Method:                        List Order
+     * Description:                   to list all the orders 
+	************************************************************************************/
 	public List<OrderInformation> showOrderList();
 	
 	//Update Customer Information

@@ -8,6 +8,14 @@ import com.cg.bookStore.entities.OrderInformation;
 import com.cg.bookStore.entities.CartInformation;
 import com.cg.bookStore.entities.CustomerReview;
 
+/************************************************************************************
+ *          @author          Kiran Rajput
+ *          Description      It is a dao class that provides the methods for listing,
+ *          deleting, cancel and view orders
+ *          Version             1.0
+ *          Created Date     18-JUL-2020
+ ************************************************************************************/
+
 @Repository
 public interface BookDao {
 
@@ -15,12 +23,21 @@ public interface BookDao {
 	
 	public boolean removeBook(int bookId);
 	
-	//Cancle Order
+		/************************************************************************************
+		 * Method:                        cancel order 
+		 * Description:                   To cancel the  order 
+		 * @param getAppointment          cancel order
+		 ************************************************************************************/
+	
 		public boolean findOrder(int orderId);
 		public OrderInformation getOrderDetails(int orderId);
 		public void updateOrderStatus(int orderId,String orderStatus);
 		
-	//List all order
+		/************************************************************************************
+		 * Method:                        List order information
+	     * Description:                   To fetch the details of the order 
+		 * @param getAppointment          List information
+		 ************************************************************************************/
 		public List<OrderInformation> showListOrder();
 		
 	//Update Customer Information

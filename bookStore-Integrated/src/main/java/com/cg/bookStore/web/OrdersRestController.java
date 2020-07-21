@@ -26,6 +26,14 @@ import com.cg.bookStore.util.OrderConstraints;
 
 import org.springframework.http.HttpStatus;
 
+/************************************************************************************
+*          @author          Kiran Rajput
+*          Description      It is a controller class that process action for 
+*                           listing, deleting, cancel and view orders
+*          Version          1.0
+*          Created Date     18-Jul-2020
+************************************************************************************/
+
 @RestController
 public class OrdersRestController {
 
@@ -46,11 +54,25 @@ public class OrdersRestController {
 	   	return "Successfully Deleted";	
 	}
 	
-	//Cancel Order
+	/************************************************************************************
+	 * Method:                      cancel orders
+     * Description:                  To cancel order
+	 * @param listOrders	         cancel orders
+	 * @throws BookIdException 
+	 * @throws OrdersException 
+	 * @mapping GetMapping           Make HTTP request to get all appointments 
+	************************************************************************************/
 	@GetMapping("/cancelOrder/{orderId}")
-	public ResponseEntity<String> cancelOrder(@PathVariable int orderId)  
+	public ResponseEntity<String> cancelOrder(@PathVariable int orderId) throws BookIdException 
 		{
-		
+		/*
+		String order_Id=Integer.toString(orderId);
+		if(!(order_Id.matches("[0-9]+")))
+			
+		{
+			throw new BookIdException("It must be digit");
+		}
+		*/
 		
 		String result="Order Id Not Found";
 		if(service.findOrderById(orderId))
@@ -63,10 +85,14 @@ public class OrdersRestController {
 		
 	}
 	
-	
-	//List Order
-	@GetMapping("/listOrders")
-	public List<OrderInformation> showOrder() throws OrdersException
+		/************************************************************************************
+		 * Method:                       List all orders
+	     * Description:                  To List all orders
+		 * @param listOrders	         List all orders
+		 * @mapping GetMapping           Make HTTP request to get all appointments 
+		************************************************************************************/
+		@GetMapping("/listOrders")
+		public List<OrderInformation> showOrder() throws OrdersException
 	{
 		
 		List<OrderInformation> orders = service.showOrderList();

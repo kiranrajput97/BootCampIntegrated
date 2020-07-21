@@ -14,6 +14,14 @@ import com.cg.bookStore.entities.OrderInformation;
 import com.cg.bookStore.entities.CartInformation;
 import com.cg.bookStore.entities.CustomerReview;
 
+/************************************************************************************
+ *          @author          Kiran Rajput
+ *          Description      It is a A Book Dao Interface class that provides Interface for the, 
+                             DAo class and all its conponents  
+  *         Version             1.0
+  *         Created Date    18-JUL-2020
+ ************************************************************************************/
+
 @Transactional
 @Repository
 public class BookDaoImpl implements BookDao{
@@ -28,23 +36,28 @@ public class BookDaoImpl implements BookDao{
 	}
 	
 
-	public boolean removeBook(int bookId) {
-	    String jpql ="delete from OrderInformation p where p.book.bookId=:bid";
-			
-			Query query = em.createQuery(jpql);
-			
-			query.setParameter("bid", bookId);
-			int res =query.executeUpdate();
-			if(res > 0)
-			return true;
-			else
-				return false;
-			
+			public boolean removeBook(int bookId) {
+			    String jpql ="delete from OrderInformation p where p.book.bookId=:bid";
+					
+				Query query = em.createQuery(jpql);
+					
+				query.setParameter("bid", bookId);
+				int res =query.executeUpdate();
+				if(res > 0)
+					return true;
+				else
+					return false;
+					
 		}
 
 		
 
-	//Cancle Order.
+			/************************************************************************************
+			 * Method:                        cancel order information
+		     * Description:                   To cancel the details of the order 
+			 * @param getAppointment          cancel order
+			 ************************************************************************************/
+			
 			@Override
 			public boolean findOrder(int orderId) {
 				// TODO Auto-generated method stub
@@ -67,7 +80,12 @@ public class BookDaoImpl implements BookDao{
 				return em.find(OrderInformation.class, orderId);
 			}
 			
-			//List of all Order
+			/************************************************************************************
+			 * Method:                        List order information
+		     * Description:                   To fetch the details of the order 
+			 * @param getAppointment          List information
+			 ************************************************************************************/
+			
 			@Override
 			public List<OrderInformation> showListOrder() {
 				// TODO Auto-generated method stub
