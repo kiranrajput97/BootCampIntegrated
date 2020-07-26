@@ -21,7 +21,7 @@ public interface BookDao {
 
 	public OrderInformation viewOrderDetails(int orderId);
 	
-	public boolean removeBook(int bookId);
+	public boolean removeBook(int bookId,int orderId);
 	
 		/************************************************************************************
 		 * Method:                        cancel order 

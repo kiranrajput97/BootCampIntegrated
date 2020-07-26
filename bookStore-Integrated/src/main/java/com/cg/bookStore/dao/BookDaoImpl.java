@@ -36,12 +36,14 @@ public class BookDaoImpl implements BookDao{
 	}
 	
 
-			public boolean removeBook(int bookId) {
-			    String jpql ="delete from OrderInformation p where p.book.bookId=:bid";
+			public boolean removeBook(int bookId,int orderId) {
+				
+			    String jpql ="delete from OrderInformation p where p.book.bookId=:bid and p.orderId=:oid ";
 					
 				Query query = em.createQuery(jpql);
 					
 				query.setParameter("bid", bookId);
+				query.setParameter("oid", orderId);
 				int res =query.executeUpdate();
 				if(res > 0)
 					return true;

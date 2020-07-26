@@ -33,7 +33,7 @@ import org.springframework.http.HttpStatus;
 *          Version          1.0
 *          Created Date     18-Jul-2020
 ************************************************************************************/
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class OrdersRestController {
 
@@ -41,16 +41,17 @@ public class OrdersRestController {
 	public BookService service;
 
 	@GetMapping("/viewOrderDetailsById/{orderId}")
-	public OrderInformation viewOrderDetails(@RequestParam int orderId) throws OrdersException
+	public OrderInformation viewOrderDetails(@PathVariable int orderId) throws OrdersException
 	{
 		return service.viewOrderDetails(orderId);	
 	}
 
-	@DeleteMapping("/deletebook/{bookId}")
-	public String deleteBook(@PathVariable("bookId")String bookId)throws BookIdException,
+	@DeleteMapping("/deletebook/{bookId}/{orderId}")
+	public String deleteBook(@PathVariable("bookId")String bookId,@PathVariable("orderId")int orderId)throws BookIdException,
 	BookIdNotFoundException
 	{	
-	   	service.removeBook(bookId);
+		System.out.println("delete order");
+	   	service.removeBook(bookId,orderId);
 	   	return "Successfully Deleted";	
 	}
 	
@@ -65,14 +66,7 @@ public class OrdersRestController {
 	@GetMapping("/cancelOrder/{orderId}")
 	public ResponseEntity<String> cancelOrder(@PathVariable int orderId) throws BookIdException 
 		{
-		/*
-		String order_Id=Integer.toString(orderId);
-		if(!(order_Id.matches("[0-9]+")))
-			
-		{
-			throw new BookIdException("It must be digit");
-		}
-		*/
+		
 		
 		String result="Order Id Not Found";
 		if(service.findOrderById(orderId))
@@ -102,4 +96,10 @@ public class OrdersRestController {
 		}
 		return orders;	
 	}
+		
+		@PutMapping("/update_order/{orderId}")
+		public void updateShippingAddress(@PathVariable int orderId, @RequestBody OrderInformation orderInfo)    
+		{
+			service.updateOrder(orderId, orderInfo);
+	    }
 }

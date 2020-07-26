@@ -47,16 +47,16 @@ public class BookServiceImpl implements BookService{
 	
 
 	@Transactional
- public boolean removeBook(String bookId) throws BookIdException, BookIdNotFoundException {
+ public boolean removeBook(String bookId,int orderId) throws BookIdException, BookIdNotFoundException {
 
 	if(!bookId.matches("^[0-9]*$"))
 		throw new BookIdException(OrderConstraints.BOOK_Id_EXCEPTION);
 	
-	else if(dao.removeBook(Integer.parseInt(bookId))!=true)
+	else if(dao.removeBook(Integer.parseInt(bookId),orderId)!=true)
 		throw new BookIdNotFoundException(OrderConstraints.BOOK_ID_NOT_Found);
 	 
 	else
-		 dao.removeBook(Integer.parseInt(bookId));
+		 dao.removeBook(Integer.parseInt(bookId),orderId);
 	    return true;
 	}
 	
@@ -114,21 +114,13 @@ public class BookServiceImpl implements BookService{
 	// Update Customer Information
 	
 	@Override
-	public boolean updateShippingAddress(int orderId, String newAddress) 
+	public boolean updateOrder(int orderId, OrderInformation order) 
 	{
-		OrderInformation order = dao.getOrderById(orderId);
-		order.setShippingAddress(newAddress);
 		dao.updateOrderInfo(order);
 		return true;
 	}
 
-	@Override
-	public boolean updateOrderStatus(int orderId, String status) {
-		OrderInformation order = dao.getOrderById(orderId);
-		order.setOrderStatus(status);
-		dao.updateOrderInfo(order);
-		return true;
-	}
+	
 	
 	
 }

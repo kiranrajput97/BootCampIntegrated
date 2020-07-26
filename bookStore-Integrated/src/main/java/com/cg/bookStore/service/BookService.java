@@ -23,7 +23,7 @@ public interface BookService {
 	
 
 
-	public boolean removeBook(String bookId)throws BookIdException,BookIdNotFoundException;
+	public boolean removeBook(String bookId,int orderId)throws BookIdException,BookIdNotFoundException;
 
 	/************************************************************************************
 	 * Method:                        cancel Order
@@ -39,8 +39,8 @@ public interface BookService {
 	public List<OrderInformation> showOrderList();
 	
 	//Update Customer Information
-	public boolean updateShippingAddress(int orderId,String newAddress);
-	public boolean updateOrderStatus(int orderId,String status);
+	public boolean updateOrder(int orderId,OrderInformation order);
+	//public boolean updateOrderStatus(int orderId,String status);
 	
 	
 	
